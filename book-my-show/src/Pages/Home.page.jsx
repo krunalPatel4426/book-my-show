@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import DefaultLayoutHOC from '../Layouts/Default.layout';
+
 import EntertainmentCardSlider from '../components/Entertainment/EntertainmentCard.Component';
 import HeroCoursel from '../components/HeroCoursel/HeroCarousel.Component';
 import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
@@ -23,7 +25,7 @@ const HomePage = () => {
       <div className='container mx-auto px-4 md:px-12 my-8'>
         <PosterSlider 
           title = "Recommended Movies"
-          subject = "List of recommended movies"
+          subtitle = "List of recommended movies"
           posters = {recommendedMovies}
           isDark = {false}
         />
@@ -36,7 +38,7 @@ const HomePage = () => {
           </div>
           <PosterSlider 
             title = "Premiers"
-            subject = "Brand new releases every friday"
+            subtitle = "Brand new releases every friday"
             posters = {premierMovies}
             isDark = {true}
           />
@@ -46,7 +48,7 @@ const HomePage = () => {
       <div className='container mx-auto px-4 md:px-12 my-8'>
         <PosterSlider 
           title = "Online Streaming Events"
-          subject = "Online Streaming"
+          subtitle = "Online Streaming"
           posters = {onlineStreamEvent}
           isDark = {false}
         />
@@ -55,4 +57,4 @@ const HomePage = () => {
   );
 }
 
-export default HomePage;
+export default DefaultLayoutHOC(HomePage);
