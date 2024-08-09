@@ -4,7 +4,31 @@ import Poster from '../Poster/Poster.Components';
 
 const PosterSlider = (props) => {
   const {posters, title, subtitle, isDark} = props;
-  const setting = {};
+  const settings = {
+    infinite: true,
+    arrows: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          arrows:false,
+          swipeToSlide: true,
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
     <>
       <div className='flex flex-col items-start sm:ml-3 my-2'>
@@ -17,8 +41,8 @@ const PosterSlider = (props) => {
         </p>
       </div>
 
-      <Slider {...setting}>
-          {posters.map((img) => (<Poster {...img} isDark={isDark}/>)
+      <Slider {...settings}>
+          {posters.map((img, index) => (<Poster {...img} isDark={isDark} key={index}/>)
         )}
       </Slider>
     </>

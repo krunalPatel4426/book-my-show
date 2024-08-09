@@ -62,13 +62,13 @@ const HeroCarousel = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
   };
-  console.log(settings);
+  // console.log(settings);
   return (
       <>
         <div className='lg:hidden'>
           <HeroSlider {...settings}>
-          {images.map((img) => (
-            <div className='w-full h-56 md:h-80 py-3'>
+          {images.map((img, index) => (
+            <div className='w-full h-56 md:h-80 py-3' key={index}>
               <img src={`https://image.tmdb.org/t/p/original${img.backdrop_path}`} alt="Hero Banner" className='w-full h-full rounded-md object-cover'/>
             </div>
           ))}
@@ -77,8 +77,8 @@ const HeroCarousel = () => {
         <div className='hidden lg:block'>
           
           <HeroSlider {...settingLG}>
-            {images.map((img) => (
-              <div className='w-full h-96 px-2 py-3'>
+            {images.map((img, index) => (
+              <div className='w-full h-96 px-2 py-3' key={index}>
                 <img src={`https://image.tmdb.org/t/p/original${img.backdrop_path}`}
                 alt="Hero Banner" 
                 className='w-full h-full rounded-md object-cover'/>
@@ -86,7 +86,6 @@ const HeroCarousel = () => {
             ))}
           </HeroSlider>
         </div>
-        {console.log("Hello")}
       </>
   )
 }

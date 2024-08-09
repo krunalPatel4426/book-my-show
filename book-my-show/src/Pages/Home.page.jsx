@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 import DefaultLayoutHOC from '../Layouts/Default.layout';
 
@@ -10,6 +11,36 @@ const HomePage = () => {
   const  [recommendedMovies, setRecommendedMovies] = useState([]);
   const [premierMovies, setPremierMovies] = useState([]);
   const [onlineStreamEvent, setOnlineStreamEvent] = useState([]);
+
+  useEffect(() => {
+    const requestPopularMovies = async () => {
+      const getPopulerMovies = await axios.get(
+        "/movie/popular"
+      );
+      setPremierMovies(getPopulerMovies.data.results);
+    };
+    requestPopularMovies();
+  }, []);
+
+  useEffect(() => {
+    const requestTopRatedMovies = async () => {
+      const getTopRatedMovies = await axios.get(
+        "/movie/top_rated"
+      );
+      setRecommendedMovies(getTopRatedMovies.data.results);
+    };
+    requestTopRatedMovies();
+  }, []);
+
+  useEffect(() => {
+    const requestUpcomingMovies = async () => {
+      const getUpcomingMovies = await axios.get(
+        "/movie/upcoming"
+      );
+      setOnlineStreamEvent(getUpcomingMovies.data.results);
+    };
+    requestUpcomingMovies();
+  }, []);
 
   return (
     <>
