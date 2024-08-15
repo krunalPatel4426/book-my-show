@@ -38,7 +38,7 @@ function NavMd() {
 function NavLg() {
   return (
     <>
-      <div className="container flex mx-auto px-4 items-center justify-between">
+      <div className="container w-full h-20 flex mx-24 px-4 items-center justify-between">
         <div className="flex items-center w-1/2 gap-3">
           <div className="w-59 h-10">
             <img src="https://getlogo.net/wp-content/uploads/2020/04/bookmyshow-logo-vector.png"
@@ -59,16 +59,42 @@ function NavLg() {
   );
 }
 
+function BottomNavbar({style}) {
+  return (
+    <>
+      <div className={`bg-slate-100 justify-between flex w-full ${style} h-8`}>
+          <div className="flex gap-4 items-center text-slate-800 text-sm">
+              <a href="#">Movies</a>            
+              <a href="#">Stream</a>            
+              <a href="#">Events</a>            
+              <a href="#">Plays</a>            
+              <a href="#">Sports</a>            
+              <a href="#">Activities</a>         
+          </div>
+          <div className="flex gap-4 items-center text-slate-800 text-sm">
+            <a href="#">ListYourShow</a>
+            <a href="#">Corporates</a>
+            <a href="#">Offers</a>
+            <a href="#">Gift Cards</a>
+          </div>
+      </div>
+    </>
+  );
+}
+
 // Main Component
 const Navbar = () => {
   return <>
     <nav className="bg-white h-13">
-      <div className="hidden md:hidden lg:flex">
+      <div className="hidden md:hidden lg:flex flex-col">
+
         <NavLg />
+        <BottomNavbar style="px-24" />
       </div>
 
-      <div className="hidden md:flex lg:hidden">
+      <div className="hidden md:flex lg:hidden flex-col">
         <NavMd />
+        <BottomNavbar style="px-2"/>
       </div>
 
       

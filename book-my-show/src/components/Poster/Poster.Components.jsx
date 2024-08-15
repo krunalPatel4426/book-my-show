@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const Poster = (props) => {
+    // const {movie, setMovie} = useContext(movieContext);
     return (
         <Link to={`/movie/${props.id}`}>
             <div className="flex flex-col items-start gap-2 px-1 md:px-3">

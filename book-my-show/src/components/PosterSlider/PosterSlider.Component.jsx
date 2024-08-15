@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Poster from '../Poster/Poster.Components';
 
 const PosterSlider = (props) => {
-  const {posters, title, subtitle, isDark} = props;
+  const {posters, title, subtitle, isDark, config} = props;
   const settings = {
     infinite: true,
     arrows: true,
@@ -29,6 +29,7 @@ const PosterSlider = (props) => {
       },
     ],
   };
+    // console.log(posters);
   return (
     <>
       <div className='flex flex-col items-start sm:ml-3 my-2'>

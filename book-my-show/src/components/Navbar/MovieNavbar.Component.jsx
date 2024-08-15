@@ -1,8 +1,11 @@
 import React from 'react';
+import Navbar from './Navbar.Component';
 
 const MovieNavbar = () => {
   return (
-    <div>MovieNavbar</div>
+    <>
+      <Navbar/>
+    </>
   )
 }
 
