@@ -9,7 +9,7 @@ function MovieInfoContainer(){
   const {premierMovies, setPremierMovies} = useContext(movieContext);
   const {onlineStreamEvent, setOnlineStreamEvent} = useContext(movieContext);
   const {id} = useParams();
-  console.log(movie);
+  // console.log(movie);
   // console.log(id);
   let movieInfo = movie.find((each) => each.id == id);
   if(!movieInfo){
@@ -17,16 +17,31 @@ function MovieInfoContainer(){
   }else if(!movieInfo){
     movieInfo = onlineStreamEvent.find((each) => each.id == id);
   }
+
+  //movies genre api call
+  const [genre, setGenre] = useState([]);
+  useEffect(() => {
+    const requestGenre = async () => {
+      const getGenre = await axios.get("/genre/movie/list");
+      setGenre(getGenre.data.genres);
+    }
+    requestGenre();
+  });
+  // console.log(genre);
   console.log(movieInfo);
   // const bg = "bg-gradient-ro-r from-black ...";
   // const URL_IMG = "url('https://image.tmdb.org/t/p/original"+ movieInfo.poster_path + "')";
   // console.log(URL_IMG)
+  const styleBackgroundImg = {
+    backgroundImage: `linear-gradient(90deg, rgb(34,34,34) 24.95%, rgb(34,34,34) 38.2%, rgba(34,34,34, 0.03) 97.47%, rgb(34,34,34) 100%), url('https://image.tmdb.org/t/p/original${movieInfo.backdrop_path}')`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+  }
   return (
     <>
-      {/* <div className='flex w-full bg-no-repeat bg-contain bg-center h-96' style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieInfo.poster_path}')`}}> */}
-        {/* <img className="w-full mx-16" src={`https://image.tmdb.org/t/p/original${movieInfo.poster_path}`} alt={`${movieInfo.title}`} /> */}
-      {/* </div> */}
-      <div className='bg-black w-full h-96 flex flex-row gap-11'>
+      <div className='flex w-full bg-no-repeat bg-contain bg-center h-96' style={styleBackgroundImg}>
+      <div className='w-full h-96 flex flex-row gap-11'>
           <div className='ms-24 flex w-44 h-72 mt-12 flex-col'>
             <img className='rounded-lg' src={`https://image.tmdb.org/t/p/original${movieInfo.poster_path}`} alt={movieInfo.title} />
             <p className='text-white flex justify-center text-sm'>In cinemas</p>
@@ -49,6 +64,8 @@ function MovieInfoContainer(){
             <button className='flex mt-6 bg-red-600 w-40 rounded-md justify-center p-4 text-xl'>Book tickits</button>
           </div>
           
+      </div>
+
       </div>
     </>
   );
