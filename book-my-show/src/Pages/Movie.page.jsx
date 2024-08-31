@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import CastCrewSlider from '../components/CastCrewSlider/CastCrewSlider';
 import MovieNavbar from '../components/Navbar/MovieNavbar.Component';
 import { movieContext } from '../context/Movie.context';
 
@@ -28,10 +29,16 @@ function MovieInfoContainer(){
     requestGenre();
   });
   // console.log(genre);
-  console.log(movieInfo);
+  // console.log(movieInfo);
+  const movieGenreId = movieInfo.genre_ids;
+  const movieGenre = genre.filter((each) => movieGenreId.includes(each.id));
+  // console.log(movieGenre)
+  // console.log(movieGenreId)
   // const bg = "bg-gradient-ro-r from-black ...";
   // const URL_IMG = "url('https://image.tmdb.org/t/p/original"+ movieInfo.poster_path + "')";
   // console.log(URL_IMG)
+
+
   const styleBackgroundImg = {
     backgroundImage: `linear-gradient(90deg, rgb(34,34,34) 24.95%, rgb(34,34,34) 38.2%, rgba(34,34,34, 0.03) 97.47%, rgb(34,34,34) 100%), url('https://image.tmdb.org/t/p/original${movieInfo.backdrop_path}')`,
     backgroundPosition: 'center',
@@ -57,11 +64,14 @@ function MovieInfoContainer(){
               </div>
               <button className='bg-red-600 p-2 rounded-xl'>Rate now</button>
             </div>
-            <div className='flex flex-row gap-8 text-slate-900'>
-              <button className='bg-slate-300 p-2 rounded-md'>2D</button>
-              <button className='bg-slate-300 p-2 rounded-md'>{movieInfo.original_language}</button>
+            <div className='flex flex-row gap-8 h-7 text-slate-900'>
+              <button className='bg-slate-300 p-2 rounded-md flex items-center'>2D</button>
+              <button className='bg-slate-300 p-2 rounded-md flex items-center'>{movieInfo.original_language}</button>
             </div>
-            <button className='flex mt-6 bg-red-600 w-40 rounded-md justify-center p-4 text-xl'>Book tickits</button>
+              <div>
+                <p className='text-white'>{movieGenre.map((each) => ` ${each.name} , `)}</p>
+              </div>
+            <button className='flex mt-3 bg-red-600 w-40 h-12 items-center rounded-md justify-center p-4 text-xl'>Book tickits</button>
           </div>
           
       </div>
@@ -71,6 +81,41 @@ function MovieInfoContainer(){
   );
 }
 
+const AboutMovie = () => {
+
+}
+
+const Cast = ({cast}) => {
+  let movieCast;
+  if(cast){
+    movieCast = cast.filter((each) => each.known_for_department === "Acting");
+    return <>
+    <div className='px-24 mt-14'>
+      <div className='font-bold text-3xl'>Cast</div>
+      <CastCrewSlider cast = {movieCast} />
+    </div>
+    </>
+  }else{
+    return <>
+    </>
+  }
+}
+const Crew = ({cast}) => {
+  let movieCrew;
+  console.log(cast)
+  if(cast){
+    movieCrew = cast.filter((each) => each.known_for_department === "Crew");
+    return <>
+    <div className='px-24 mt-14'>
+      <div className='font-bold text-3xl'>Crew</div>
+      <CastCrewSlider cast = {movieCrew} />
+    </div>
+    </>
+  }else{
+    return <>
+    </>
+  }
+}
 const MoviePage = () => {
   let {id} = useParams();
   
@@ -91,10 +136,14 @@ const MoviePage = () => {
     };
     requestSimilarMovies();
   },[id]);
+  // console.log(cast)
   return (
       <>
         <MovieNavbar/>
         <MovieInfoContainer />
+        <AboutMovie />
+        <Cast cast = {cast}/>
+        <Crew cast = {cast}/>
       </>
   )
 }
