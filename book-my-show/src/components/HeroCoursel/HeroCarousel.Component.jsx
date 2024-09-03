@@ -55,9 +55,10 @@ const HeroCarousel = () => {
     arrows: true,
     slidesToShow: 1,
     infinite: true,
+    adaptiveHeight: true,
     speed: 500,
     slideToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     cssEase: "linear",
@@ -69,7 +70,7 @@ const HeroCarousel = () => {
           <HeroSlider {...settings}>
           {images.map((img, index) => (
             <div className='w-full h-56 md:h-80 py-3' key={index}>
-              <img src={`https://image.tmdb.org/t/p/original${img.backdrop_path}`} alt="Hero Banner" className='w-full h-full rounded-md object-cover'/>
+              <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1717080055549_playcardweb.jpg" alt="Hero Banner" className='w-full h-full rounded-md object-cover'/>
             </div>
           ))}
           </HeroSlider>
@@ -79,7 +80,7 @@ const HeroCarousel = () => {
           <HeroSlider {...settingLG}>
             {images.map((img, index) => (
               <div className='w-full h-96 px-2 py-3' key={index}>
-                <img src={`https://image.tmdb.org/t/p/original${img.backdrop_path}`}
+                <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1717080055549_playcardweb.jpg"
                 alt="Hero Banner" 
                 className='w-full h-full rounded-md object-cover'/>
               </div>
