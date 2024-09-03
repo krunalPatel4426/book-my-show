@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
-
-import DefaultLayoutHOC from '../Layouts/Default.layout';
 import EntertainmentCardSlider from '../components/Entertainment/EntertainmentCard.Component';
+import HeroCarousel from "../components/HeroCoursel/HeroCarousel.Component";
 import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
 import { movieContext } from '../context/Movie.context';
+import DefaultLayoutHOC from '../Layouts/Default.layout';
 
 const HomePage = () => {
   const {movie, setMovie} = useContext(movieContext);

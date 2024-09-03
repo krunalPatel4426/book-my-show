@@ -102,15 +102,20 @@ const Cast = ({cast}) => {
 }
 const Crew = ({cast}) => {
   let movieCrew;
-  console.log(cast)
+  // console.log(cast)
   if(cast){
     movieCrew = cast.filter((each) => each.known_for_department === "Crew");
-    return <>
-    <div className='px-24 mt-14'>
-      <div className='font-bold text-3xl'>Crew</div>
-      <CastCrewSlider cast = {movieCrew} />
-    </div>
-    </>
+    if(movieCrew.length !== 0){
+      return <>
+      <div className='px-24 mt-14'>
+        <div className='font-bold text-3xl'>Crew</div>
+        <CastCrewSlider cast = {movieCrew} />
+      </div>
+      </>
+    }else{
+      return <>
+      </>
+    }
   }else{
     return <>
     </>
