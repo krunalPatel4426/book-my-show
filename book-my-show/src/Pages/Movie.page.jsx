@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CastCrewSlider from '../components/CastCrewSlider/CastCrewSlider';
+import Footer from '../components/Footer.component/Footer.component';
 import MovieNavbar from '../components/Navbar/MovieNavbar.Component';
+import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
 import { movieContext } from '../context/Movie.context';
-
 function MovieInfoContainer(){
   const {movie, setMovie} = useContext(movieContext);
   const {premierMovies, setPremierMovies} = useContext(movieContext);
@@ -121,6 +122,23 @@ const Crew = ({cast}) => {
     </>
   }
 }
+
+const AlsoLikeMovies = ({id}) => {
+  const {premierMovies, setPremierMovies} = useContext(movieContext);
+  // console.log(id)
+  // console.log(premierMovies[0])
+  const alikeMovie = premierMovies.filter((each) => each.id != id);
+  return <>
+    <div className='px-24'>
+      <PosterSlider 
+            title = "You might also like"
+            subtitle = ""
+            posters = {alikeMovie}
+            isDark = {false}
+          />
+    </div>
+  </>
+}
 const MoviePage = () => {
   let {id} = useParams();
   
@@ -149,6 +167,8 @@ const MoviePage = () => {
         <AboutMovie />
         <Cast cast = {cast}/>
         <Crew cast = {cast}/>
+        <AlsoLikeMovies id = {id} />
+        <Footer />
       </>
   )
 }
